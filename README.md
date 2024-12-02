@@ -13,4 +13,4 @@ Este proyecto es una implementación de Programación Orientada a Objetos (POO) 
 #### Instrucciones de uso:
 -Descargar el archivo
 -Compilarlo
--al momento de ejecutar ell programa mostrará en la consola toda la información almacenada, como los datos de los empleados, productos, clientes y proveedores.
+-Al momento de ejecutar ell programa mostrará en la consola toda la información almacenada, como los datos de los empleados, productos, clientes y proveedores.
