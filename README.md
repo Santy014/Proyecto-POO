@@ -1,7 +1,16 @@
-# Proyecto POO
+# Proyecto POO - Supermercado 
  Programacion orientada a objetos A01713396 Santiago Martin del Campo Soler
- Mi proyecto en este periodo se va a enfocar en un programa util para encargados de un supermercado, contando con distintas clases que pueden describir varios apartados que se deben de encontrar dentro de un supermercado como lo puede ser el empleado, un proveedor y un producto, todo contando con la información necesaria, 
+## Descripción
+Este proyecto es una implementación de Programación Orientada a Objetos (POO) que gestiona varios aspectos de un supermercado. Se enfoca en representar clases como empleados, proveedores, productos y clientes, permitiendo almacenar y consultar información relevante.
 
- Mi poyecto funciona de una manera que al modificar los datos que se encuentran dentro del constructor del main al momento de ejecutar el programa nos deberia desplegar toda la información con la que contamos, como lo podria ser el stock del producto, cargo de el empleado en cuestion o numero de telefono del proveedor.
+### Características principales:
+- Gestión de empleados: Cargos, salarios, posiciones.
+- Gestión de productos: Stock, precio, código.
+- Gestión de proveedores: Contacto, dirección, teléfono.
+- Información sobre clientes: Historial de compras, datos personales.
 
- En el futuro se planea añadir una forma en que el usuario pueda interactuar de una manera mas sencilla con el programa, de una forma que el programa le solicite al usuario los datos que se desplegarán al finalizar de correr el programa. 
+
+#### Instrucciones de uso:
+-Descargar el archivo
+-Compilarlo
+-al momento de ejecutar ell programa mostrará en la consola toda la información almacenada, como los datos de los empleados, productos, clientes y proveedores.
