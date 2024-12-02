@@ -7,7 +7,7 @@ Este proyecto es una implementación de Programación Orientada a Objetos (POO) 
 - Gestión de empleados: Cargos, salarios, posiciones.
 - Gestión de productos: Stock, precio, código.
 - Gestión de proveedores: Contacto, dirección, teléfono.
-- Información sobre clientes: Historial de compras, datos personales.
+- Datos de los clientes.
 
 
 #### Instrucciones de uso:
