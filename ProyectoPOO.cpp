@@ -3,9 +3,49 @@
 #include <string>
 using namespace std;
 
-// Clase base Usuario
+// Clase Proveedor
+class Proveedor {
+private:
+    string nombre, direccion;
+    int telefono;
+
+public:
+    // Constructor
+    Proveedor(string n, string d, int t) : nombre(n), direccion(d), telefono(t) {}
+
+    //getters
+    string getNombre() const { 
+        return nombre;
+         }
+    string getDireccion() const {
+         return direccion; 
+         }
+    int getTelefono() const { 
+        return telefono; 
+        }
+
+    //setters
+    void setNombre(string n) { 
+        nombre = n; 
+        }
+    void setDireccion(string d) { 
+        direccion = d; 
+        }
+    void setTelefono(int t) { 
+        telefono = t;
+         }
+
+    //muestra la informacion del proveedor
+    void mostrarInfo() const {
+        cout << "Proveedor: " << nombre
+             << "\nDireccion: " << direccion
+             << "\nTelefono: " << telefono << endl;
+    }
+};
+
+// Clase Usuario
 class Usuario {
-protected:
+private:
     string nombre;
     int id;
 
@@ -13,84 +53,109 @@ public:
     // Constructor
     Usuario(string n, int i) : nombre(n), id(i) {}
 
-    // Getters
-    string getNombre() const { return nombre; }
-    int getId() const { return id; }
+    virtual ~Usuario() {}
 
-    // Setters
-    void setNombre(string n) { nombre = n; }
-    void setId(int i) { id = i; }
+    //getter
+    string getNombre() const { 
+        return nombre; 
+        }
+    int getId() const { 
+        return id;
+         }
+         
+    //setter
+    void setNombre(string n) { 
+        nombre = n; 
+        }
+    void setId(int i) {
+         id = i;
+          }
 
-    // Método común para mostrar información
+    //metodo que podra ser heredado por las clases hijas
     virtual void mostrarInfo() const {
         cout << "Nombre: " << nombre << "\nID: " << id << endl;
     }
 };
 
-// Clase Cliente (hereda de Usuario)
+// Clase Cliente
 class Cliente : public Usuario {
 private:
     double totalGastado;
 
 public:
-    // Constructor que utiliza el constructor de Usuario
+    // Constructor
     Cliente(string n, int i, double tg) : Usuario(n, i), totalGastado(tg) {}
 
-    // Getter y Setter de Cliente
-    double getTotalGastado() const { return totalGastado; }
-    void setTotalGastado(double tg) { totalGastado = tg; }
+    //getter
+    double getTotalGastado() const { 
+        return totalGastado; 
+        }
+    
+    //setter
+    void setTotalGastado(double tg) {
+         totalGastado = tg;
+          }
 
-    // Heredar el metódo mostrarinfo 
     void mostrarInfo() const override {
         Usuario::mostrarInfo();
         cout << "Total Gastado: $" << totalGastado << endl;
     }
 };
 
-// Clase Administrador (hereda de Usuario)
+// Clase Administrador
 class Administrador : public Usuario {
 private:
     int nivelDeAcceso;
+    Proveedor proveedor;  // El Administrador esta asociado al proveedor 
 
 public:
-    // Constructor que utiliza el constructor de Usuario
-    Administrador(string n, int i, int nivel) : Usuario(n, i), nivelDeAcceso(nivel) {}
+    // Constructor
+Administrador(string n, int i, int nivel, Proveedor p)
+        : Usuario(n, i), nivelDeAcceso(nivel), proveedor(p) {}
 
-    // Getter y Setter de Administrador
-    int getNivelDeAcceso() const { return nivelDeAcceso; }
-    void setNivelDeAcceso(int nivel) { nivelDeAcceso = nivel; }
+    //getter
+int getNivelDeAcceso() const { 
+        return nivelDeAcceso; 
+        }
+    
+    //setter
+void setNivelDeAcceso(int nivel) {
+         nivelDeAcceso = nivel;
+        }
 
-    // Heredar el metódo mostrarinfo 
-    void mostrarInfo() const override {
+void mostrarInfo() const override {
         Usuario::mostrarInfo();
         cout << "Nivel de Acceso: " << nivelDeAcceso << endl;
+        cout << "Proveedor Asociado:\n";
+        proveedor.mostrarInfo();
     }
 };
 
 // Clase Empleado
 class Empleado {
 private:
-    string nombre, posicion;
+    string nombre;
+    string posicion;
     int id;
     double salario;
 
 public:
     // Constructor
-    Empleado(string n, int i, string p, double s) : nombre(n), id(i), posicion(p), salario(s) {}
-
-    // Getters
+    Empleado(string n, int i, string p, double s)
+        : nombre(n), posicion(p), id(i), salario(s) {}   
+    
+    //getters
     string getNombre() const { return nombre; }
     int getId() const { return id; }
     string getPosicion() const { return posicion; }
     double getSalario() const { return salario; }
 
-    // Setters
+    //setters
     void setNombre(string n) { nombre = n; }
-    void setId(int i) { id = i; }
     void setPosicion(string p) { posicion = p; }
+    void setId(int i) { id = i; }
     void setSalario(double s) { salario = s; }
 
-    // Método
     void mostrarInfo() const {
         cout << "Empleado: " << nombre
              << "\nID: " << id
@@ -98,6 +163,7 @@ public:
              << "\nSalario: $" << salario << endl;
     }
 };
+
 
 // Clase Producto
 class Producto {
@@ -110,98 +176,111 @@ public:
     // Constructor
     Producto(string n, string c, int s, double p) : nombre(n), codigo(c), stock(s), precio(p) {}
 
-    // Getters
-    string getNombre() const { return nombre; }
-    string getCodigo() const { return codigo; }
-    int getStock() const { return stock; }
-    double getPrecio() const { return precio; }
+    //getters 
+    string getNombre() const {
+         return nombre;
+          }
+    string getCodigo() const {
+         return codigo;
+          }
+    //setters
+    int getStock() const { 
+        return stock;
+         }
+    double getPrecio() const {
+         return precio; 
+         }
 
-    // Setters
-    void setNombre(string n) { nombre = n; }
-    void setCodigo(string c) { codigo = c; }
-    void setStock(int s) { stock = s; }
-    void setPrecio(double p) { precio = p; }
-
-    // Método
+    //Informacion del Producto
     void mostrarInfo() const {
-        cout << "Nombre: " << nombre
+        cout << "Producto: " << nombre
              << "\nCodigo: " << codigo
-             << "\nCantidad en stock: " << stock
-             << "\nPrecio del Producto: $" << precio << endl;
+             << "\nStock: " << stock
+             << "\nPrecio: $" << precio << endl;
     }
 };
 
-// Clase Proveedor
-class Proveedor {
-private:
-    string nombre, direccion;
-    int telefono;
-
-public:
-    // Constructor
-    Proveedor(string n, string d, int t) : nombre(n), direccion(d), telefono(t) {}
-
-    // Getters
-    string getNombre() const { return nombre; }
-    string getDireccion() const { return direccion; }
-    int getTelefono() const { return telefono; }
-
-    // Setters
-    void setNombre(string n) { nombre = n; }
-    void setDireccion(string d) { direccion = d; }
-    void setTelefono(int t) { telefono = t; }
-
-    void mostrarInfo() const {
-        cout << "Proveedor: " << nombre
-             << "\nDireccion: " << direccion
-             << "\nTelefono: " << telefono << endl;
-    }
-};
-
-
+// Clase Supermercado, 
 class Supermercado {
 private:
     vector<Cliente> clientes;
     vector<Empleado> empleados;
     vector<Administrador> administradores;
     vector<Producto> productos;
-    vector<Proveedor> proveedores;
 
 public:
-
-    Cliente agregarCliente(string nombre, int id, double totalGastado) {
-        Cliente nuevo(nombre, id, totalGastado);
-        clientes.push_back(nuevo);
-        return nuevo;
+     // Metodo para agregar un objetos en cada clase 
+    void agregarCliente(string nombre, int id, double totalGastado) {
+        Cliente cliente(nombre, id, totalGastado);
+        clientes.push_back(cliente);
     }
 
-    Administrador agregarAdministrador(string nombre, int id, int nivelDeAcceso) {
-        Administrador nuevo(nombre, id, nivelDeAcceso);
-        administradores.push_back(nuevo);
-        return nuevo;
+    void agregarEmpleado(string nombre, int id, string posicion, double salario) {
+        Empleado empleado(nombre, id, posicion, salario);
+        empleados.push_back(empleado);
     }
 
-    void mostrarTodo() {
-    cout << "Clientes:\n";
-    for (const Cliente& cliente : clientes) {  
-        cliente.mostrarInfo();
+    void agregarAdministrador(string nombre, int id, int nivelDeAcceso, Proveedor proveedor) {
+        Administrador admin(nombre, id, nivelDeAcceso, proveedor);
+        administradores.push_back(admin);
     }
 
-    cout << "\nAdministradores:\n";
-    for (const Administrador& admin : administradores) {  
-        admin.mostrarInfo();
+    void agregarProducto(string nombre, string codigo, int stock, double precio) {
+        Producto producto(nombre, codigo, stock, precio);
+        productos.push_back(producto);
     }
-}
+
+    // Métodos para mostrar la información de cada lista
+    void mostrarInfoClientes() const {
+        cout << "\nClientes:\n";
+        for (const auto& cliente : clientes) { // Bucle para iterar cada objeto dentro de un vector y mostrarlos 
+            cliente.mostrarInfo();
+            cout << endl;
+        }
+    }
+
+    void mostrarInfoEmpleados() const {
+        cout << "\nEmpleados:\n";
+        for (const auto& empleado : empleados) {
+            empleado.mostrarInfo();
+            cout << endl;
+        }
+    }
+
+    void mostrarInfoAdministradores() const {
+        cout << "\nAdministradores:\n";
+        for (const auto& admin : administradores) {
+            admin.mostrarInfo();
+            cout << endl;
+        }
+    }
+
+    void mostrarInfoProductos() const {
+        cout << "\nProductos:\n";
+        for (const auto& producto : productos) {
+            producto.mostrarInfo();
+            cout << endl;
+        }
+    }
 };
 
 // Main
 int main() {
     Supermercado supermercado;
 
-    supermercado.agregarCliente("Ana Gomez", 1001, 250.75);
-    supermercado.agregarAdministrador("Luis Garcia", 3001, 2);
+    // Crear un proveedor y agregar información al supermercado
+    Proveedor proveedor("Distribuidora ABC", "Av. Central 123", 668123456);
 
-    supermercado.mostrarTodo();
+    supermercado.agregarCliente("Ana Gomez", 1001, 250.75);
+    supermercado.agregarEmpleado("Carlos Perez", 2002, "Cajero", 15000.0);
+    supermercado.agregarAdministrador("Luis Garcia", 3001, 3, proveedor);
+    supermercado.agregarProducto("Manzana", "A101", 50, 1.25);
+
+    // Mostrar información de todos los elementos del supermercado
+    supermercado.mostrarInfoClientes();
+    supermercado.mostrarInfoEmpleados();
+    supermercado.mostrarInfoAdministradores();
+    supermercado.mostrarInfoProductos();
 
     return 0;
 }
